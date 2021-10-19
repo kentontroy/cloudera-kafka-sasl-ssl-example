@@ -70,6 +70,7 @@ Email Address []:
 Sign the broker's certificate with the CA
 ```
 On each Kafka broker, export the broker's certificate from the keystore: 
+
 keytool -keystore kafka.server.keystore.jks -alias kafka.cdp.cloudera.com -certreq -file cert-file
 
 Sign the certificate with the CA:
@@ -88,4 +89,21 @@ keytool -keystore kafka.server.keystore.jks -alias CARoot -importcert -file ca-c
 Add the signed cert to the broker's keystore:
 
 keytool -keystore kafka.server.keystore.jks -alias kafka.cdp.cloudera.com -importcert -file cert-signed
+```
+### Step 4
+Add the CA's certificate to the truststores on the client (i.e. Kafka Producers/Consumers) and server (i.e. Kafka Brokers)
+```
+Create a truststore for the clients:
+
+keytool -keystore kafka.client.truststore.jks -alias cdp.cloudera.com -keyalg RSA -genkey
+
+Create a truststore for the the Kafka Brokers:
+
+keytool -keystore kafka.server.truststore.jks -alias kafka.cdp.cloudera.com -keyalg RSA -genkey
+
+Add the CAcert to the truststore:
+
+keytool -keystore kafka.client.truststore.jks -alias CARoot -importcert -file ca-cert
+
+keytool -keystore kafka.server.truststore.jks -alias CARoot -importcert -file ca-cert
 ```
