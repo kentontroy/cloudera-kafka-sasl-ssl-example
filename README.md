@@ -28,8 +28,8 @@ Created topic test.
 21/10/19 20:29:22 WARN kerberos.KerberosLogin: [Principal=kafka/kafka.cdp.cloudera.com@CLOUDERA.COM]: TGT renewal thread has been interrupted and will exit.
 
 ```
-Step 1 <br>
-For each Kafka broker generate a public/private key pair and certificatek, persisted in a keystore <br>
+### Step 1 
+For each Kafka broker, generate a public/private key pair and certificate persisted in a keystore <br>
 The CN should be the FQDN for each broker 
 ```
 keytool -keystore kafka.server.keystore.jks -alias kafka.cdp.cloudera.com -keyalg RSA -genkey
