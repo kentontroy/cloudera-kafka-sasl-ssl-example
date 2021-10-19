@@ -66,3 +66,26 @@ Organizational Unit Name (eg, section) []:
 Common Name (eg, your name or your server's hostname) []:kafka.cdp.cloudera.com
 Email Address []:
 ```
+### Step 3
+Sign the broker's certificate with the CA
+```
+On each Kafka broker, export the broker's certificate from the keystore: 
+keytool -keystore kafka.server.keystore.jks -alias kafka.cdp.cloudera.com -certreq -file cert-file
+
+Sign the certificate with the CA:
+
+openssl x509 -req -CA ca-cert -CAkey ca-key -in cert-file -out cert-signed -days 365 -CAcreateserial
+
+Signature ok
+subject=/C=Unknown/ST=Unknown/L=Unknown/O=Unknown/OU=Unknown/CN=kafka.cdp.cloudera.com
+Getting CA Private Key
+Enter pass phrase for ca-key:
+
+Add the CA's cert to the broker's keystore:
+
+keytool -keystore kafka.server.keystore.jks -alias CARoot -importcert -file ca-cert
+
+Add the signed cert to the broker's keystore:
+
+keytool -keystore kafka.server.keystore.jks -alias kafka.cdp.cloudera.com -importcert -file cert-signed
+```
