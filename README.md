@@ -52,3 +52,17 @@ Is CN=kafka.cdp.cloudera.com, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Un
 Enter key password for <kafka.cdp.cloudera.com>
         (RETURN if same as keystore password):
 ```
+### Step 2
+Generate a Certificate Authority (CA) <br>
+The CA contains a key pair and a certificate used to sign other certificates
+```
+openssl req -new -x509 -keyout ca-key -out ca-cert -days 365 
+
+Country Name (2 letter code) [XX]:
+State or Province Name (full name) []: 
+Locality Name (eg, city) [Default City]:
+Organization Name (eg, company) [Default Company Ltd]:
+Organizational Unit Name (eg, section) []:
+Common Name (eg, your name or your server's hostname) []:kafka.cdp.cloudera.com
+Email Address []:
+```
