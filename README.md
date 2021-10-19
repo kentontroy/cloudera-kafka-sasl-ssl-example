@@ -90,6 +90,10 @@ Add the signed cert to the broker's keystore:
 
 keytool -keystore kafka.server.keystore.jks -alias kafka.cdp.cloudera.com -importcert -file cert-signed
 ```
+The client can be assured that it is talking to a legitimate Kafka Broker because the broker has presented <br>
+a signed certificate from its keystore during the SSL Handshake.<br>
+As long as the client trusts the CA, then it can trust the signed certificate.<br><br>
+
 ### Step 4
 Add the CA's certificate to the truststores on the client (i.e. Kafka Producers/Consumers) and server (i.e. Kafka Brokers)
 ```
@@ -101,7 +105,7 @@ Create a truststore for the the Kafka Brokers:
 
 keytool -keystore kafka.server.truststore.jks -alias kafka.cdp.cloudera.com -keyalg RSA -genkey
 
-Add the CAcert to the truststore:
+Add the CAcert to the truststores:
 
 keytool -keystore kafka.client.truststore.jks -alias CARoot -importcert -file ca-cert
 
