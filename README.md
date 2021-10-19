@@ -115,6 +115,6 @@ keytool -keystore kafka.client.truststore.jks -alias CARoot -importcert -file ca
 keytool -keystore kafka.server.truststore.jks -alias CARoot -importcert -file ca-cert
 ```
 ### Step 5
-Edit the Kafka service configuration in Cloudera Manager <br>
+Edit the Kafka service configuration in Cloudera Manager <br><br>
 <img src="./images/cm-kafka-ssl-client-auth.png" /> <br>
 <img src="./images/cm-kafka-advanced-configuration-snippets.png" />
