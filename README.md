@@ -94,6 +94,9 @@ The client can be assured that it is talking to a legitimate Kafka Broker becaus
 a signed certificate from its keystore during the SSL Handshake.<br>
 As long as the client trusts the CA, then it can trust the signed certificate.<br><br>
 
+Note, the client does not need to export and sign its certificate with the CA. Since Kerberos is used, the clients <br>
+authenticate with SASL/GSSAPI. Accordingly, 'trust' is established implicitly via a successful kinit and ticket granting.
+
 ### Step 4
 Add the CA's certificate to the truststores on the client (i.e. Kafka Producers/Consumers) and server (i.e. Kafka Brokers)
 ```
