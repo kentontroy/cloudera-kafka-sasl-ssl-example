@@ -1,4 +1,5 @@
 # cloudera_kafka_sasl_ssl_example
+## Self-signed certificate example
 Example of how to connect to Kafka hosted by Cloudera CDP using SASL_SSL
 
 ```
